@@ -5,65 +5,42 @@ import java.util.*;
 // class for survey to take question
  class Survey
  {
-	
-	 FileReader Fin;
-	 BufferedReader bufferReader;
-	Scanner sc= new Scanner(System.in );
-	//method for question Single select 
-	 public String singleSelect() throws IOException{
-		 int count=0;
-		 Fin= new FileReader("Survey.txt");// to read form text file
-		 
-		 bufferReader=new BufferedReader(Fin);
-		
-		 String[] questionArray=new String[6];
-		 while(count!=6) {
-			
-			 String line = bufferReader.readLine();
-			 System.out.println(line);
-			 questionArray[count]=line;
-			 
-			 count++;
-		 }
-		 int flag=0;
-		 String ans=new String();
-	        while(flag==0)
-	        {
-	          ans=sc.nextLine();
-	        
-	         for( int i=1;i<6;i++)
-	         {
-	             if(questionArray[i].equals(ans))
-	         {flag=1;
+     FileReader Fin;
+     BufferedReader bufferReader;
+     Scanner sc= new Scanner(System.in );
+     //method for question Single select 
+     public String singleSelect() throws IOException{
+     int count=0;
+     Fin= new FileReader("Survey.txt");// to read form text file
+     bufferReader=new BufferedReader(Fin);
+     String[] questionArray=new String[6];
+     while(count!=6) 
+     {
+	 tring line = bufferReader.readLine();
+	 System.out.println(line);
+	 questionArray[count]=line;
+	 count++;
+     }
+     int flag=0;
+     String ans=new String();
+     while(flag==0)
+     {
+	 ans=sc.nextLine();
+	 for( int i=1;i<6;i++)
+	 {
+	     if(questionArray[i].equals(ans))
+	     {
+	     	flag=1;
 	        break;
-	         }
-	         }
-	         if(flag==0)
-	         {
-	            System.out.println("Enter Valid ans");
-	        //    new Survey().singleSelect();
-	         }
-	        }
-	         return ans;
+	     }
 	 }
-		
-		/* String ans=sc.next();
-		
-		 for( int i=1;i<6;i++)
-		 {
-			 if(questionArray[i].equals(ans))
-		 {flag=1;
-		break;
-		 }
-		 }
-		 if(flag==0)
-		 {
-			System.out.println("Enter Valid ans");
-			new Survey().singleSelect();
-		 }
-		
-		 return ans;*/
-	// }
+	 if(flag==0)
+	 {
+	     System.out.println("Enter Valid ans");
+	 }
+      }
+      return ans;
+     }
 	 //method for multiple select question
 		public   ArrayList<String> mulipleSelect() throws IOException{
 			int count=0;
