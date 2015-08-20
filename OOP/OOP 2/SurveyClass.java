@@ -41,63 +41,62 @@ import java.util.*;
       }
       return ans;
      }
-	 //method for multiple select question
-		public   ArrayList<String> mulipleSelect() throws IOException{
-			int count=0;
-			String line=null;
-			Fin= new FileReader("Survey.txt");
-			  bufferReader=new BufferedReader(Fin);
-			  while(count!=6)
-				  { line = bufferReader.readLine();
-				 count++;
-				  }
-			 ArrayList<String> ans=new ArrayList<String>();
-			 String[] questionArray=new String[4];
-			 while(count!=10) {
-				  line = bufferReader.readLine();
-				 System.out.println(line);
-				 questionArray[count-6]=line;
-				 
-				 count++;
-			 }
-			int flag=0;
-			
-			while(flag==0)
-			{
+ //method for multiple select question
+	public   ArrayList<String> mulipleSelect() throws IOException{
+	int count=0;
+	String line=null;
+	Fin= new FileReader("Survey.txt");
+	bufferReader=new BufferedReader(Fin);
+	while(count!=6)
+	{
+		line = bufferReader.readLine();
+		count++;
+	}
+	ArrayList<String> ans=new ArrayList<String>();
+	String[] questionArray=new String[4];
+	while(count!=10) 
+	{
+		line = bufferReader.readLine();
+		System.out.println(line);
+		questionArray[count-6]=line;
+		count++;
+	}
+	int flag=0;
+	while(flag==0)
+	{
                   String Ans=new String();
                   ans=new ArrayList<String>();
-             for(int p=0;p<3;p++)
-                
-             { Ans=sc.nextLine();
-               ans.add(Ans);
-             }
-             for(int c=0;c<ans.size();c++)
-             {
-                 if(ans.get(c).equals("1"))
-                 ans.set(c,"1.Service Quality" );
-                 else if(ans.get(c).equals("2"))
-                     ans.set(c,"2.Communication");
-                 else if(ans.get(c).equals("3"))
-                     ans.set(c,"3.Delivery Process");
-             }
-             int p=0;
-             for( int i=0;i<3;i++)
-             {
-                 if(questionArray[1].equals(ans.get(i))||(questionArray[2].equals(ans.get(i)))||(questionArray[3].equals(ans.get(i)))||(ans.get(i).equals("")))// to check validation
-             { flag++;
-             
-                 if((ans.get(i).equals(""))) p++;
-                 }
-             }
-             if(p==3||flag<3)
+             	  for(int p=0;p<3;p++)
+                  { 
+                  	Ans=sc.nextLine();
+                   	ans.add(Ans);
+                  }
+             	  for(int c=0;c<ans.size();c++)
+                  {
+                 	if(ans.get(c).equals("1"))
+                 		ans.set(c,"1.Service Quality" );
+                 	else if(ans.get(c).equals("2"))
+                     		ans.set(c,"2.Communication");
+                 	else if(ans.get(c).equals("3"))
+                     		ans.set(c,"3.Delivery Process");
+             	  }
+             	  int p=0;
+             	  for( int i=0;i<3;i++)
+             	  {
+                 	if(questionArray[1].equals(ans.get(i))||(questionArray[2].equals(ans.get(i)))||(questionArray[3].equals(ans.get(i)))||(ans.get(i).equals("")))// to check validation
+             		{
+             			flag++;
+                 		if((ans.get(i).equals(""))) p++;
+                 	}
+             	  }
+             	 if(p==3||flag<3)
             	 {
-            	 System.out.println("Enter valid answer");
-            	 
-             flag=0;
+            	 	System.out.println("Enter valid answer");
+            		flag=0;
             	 }
-			}
-			  return ans;
-		 }
+	}
+	 return ans;
+	}
 		// method for text
 			  public String text() throws IOException{
 				  String line=null, ans=null;;
