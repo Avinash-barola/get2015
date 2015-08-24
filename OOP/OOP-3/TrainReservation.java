@@ -121,28 +121,28 @@ class TrainChart
 class CheckAvailability
 {
 	Scanner sc;
-	String from,to;
+	String fromStation,toStation;
 	ArrayList<String> trainInfo=new ArrayList<String>();
-	Iterator<String> itTrainInfo=trainInfo.iterator();
-	public CheckAvailability(ArrayList<String> trainInfo,String from,String to) 
+	//Iterator<String> trainInfoIterator=trainInfo.iterator();
+	public CheckAvailability(ArrayList<String> trainInfo,String fromStation,String toStation) 
 	{
 		this.trainInfo=trainInfo;	
-		this.from=from;
-		this.to=to;
+		this.fromStation=fromStation;
+		this.toStation=toStation;
 	}
-	public void checkSeatWeight(String from,String to)//to check required trains are available or not 
+	public void checkSeatOrWeightAvailability(String from,String to)//to check required trains are available or not 
 	{
-		int flag=0;
+		boolean flag=false;
 		for(int i=0;i<trainInfo.size();i++)
 		{
-			String temp[]=trainInfo.get(i).split(",");
-			if(temp[1].equalsIgnoreCase(from) && temp[2].equalsIgnoreCase(to))
+			String holdInformation[]=trainInfo.get(i).split(",");
+			if(holdInformation[1].equalsIgnoreCase(from) && holdInformation[2].equalsIgnoreCase(to))
 			{
 				System.out.println(trainInfo.get(i));
-				flag++;
+				flag=true;
 			}
 		}
-		if(flag==0)
+		if(flag==false)
 		{
 			System.out.println("Sorry no available train:");
 		}	
@@ -259,13 +259,13 @@ class TrainBooking
 //main class for train reservation
 public class TrainReservation  
 {
-	public static void main(String args[])throws FileNotFoundException,NullPointerException,IOException
+	public static void main(String args[])
 	{
 		Scanner sc=new Scanner(System.in);
 		BufferedReader bfTrain;
 		String line;
-		String name,trainType,from,to;
-		
+		String name,trainType,fromStation,toStation;
+		try {
 		while(true)
 		{
 			System.out.println("1:login\n2:exit");
@@ -274,13 +274,13 @@ public class TrainReservation
 			{
 			case 1:	ArrayList<String> trainInfo=new ArrayList<String>();
 				    FileReader finGoodsTrain=new FileReader("Goods.txt");
-				    FileReader finPasangerTrain=new FileReader("Passanger.txt");
+				    FileReader finPasangerTrain=new FileReader("Passenger.txt");
 				    System.out.println("Enter Name");
 					name=sc.next();
 					TrainChart trainchart;
-					System.out.println("Enter Train Type Passanger/Goods");
+					System.out.println("Enter Train Type Passenger/Goods");
 					trainType=sc.next();
-					if(trainType.equalsIgnoreCase("passanger"))//to check either the train is passenger type or goods type
+					if(trainType.equalsIgnoreCase("passenger"))//to check either the train is passenger type or goods type
 					{
 						bfTrain=new BufferedReader(finPasangerTrain);
 						while((line=bfTrain.readLine())!=null)
@@ -299,24 +299,27 @@ public class TrainReservation
 					TrainChart trainChart=new TrainChart(trainType,trainInfo);
 					trainChart.chart();//to call chart function of TrainChart class
 					System.out.println("Enter source station");
-					from=sc.next();
+					fromStation=sc.next();
 					System.out.println("Enter destination station");
-					to=sc.next();
-					CheckAvailability check=new CheckAvailability(trainInfo,from,to);
-					check.checkSeatWeight(from, to);
+					toStation=sc.next();
+					CheckAvailability check=new CheckAvailability(trainInfo,fromStation,toStation);
+					check.checkSeatOrWeightAvailability(fromStation, toStation);
 			
 					System.out.println("Enter train id");
 					String trainId=sc.next();
 					System.out.print("Enter Number of seats");
 					int numberOfSeats=sc.nextInt();
-					TrainBooking trainBooking=new TrainBooking(trainId,numberOfSeats,trainInfo,from,to,trainType,name);
+					TrainBooking trainBooking=new TrainBooking(trainId,numberOfSeats,trainInfo,fromStation,toStation,trainType,name);
 					PersonalInformation personalInformation=new PersonalInformation(name);
 					trainBooking.booking();
 					break;
 				case 2:System.exit(0);//case for exit from system
+				default:System.out.println("Please Enter correct option");
 				}
 		}
-		
+		}catch(Exception NullPointerException){System.out.println("Error");}	
 	}
 }
+	
+
 	
