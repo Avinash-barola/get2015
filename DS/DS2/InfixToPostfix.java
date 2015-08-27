@@ -1,13 +1,25 @@
 import java.util.Scanner;
-//class to define stack properties
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 class Stack {
+	Object listInformation;
 	char listInformationInChar;
 	Stack addressOfNextNode,top;
 	public Stack() {
 		top=null;
+	}
+	public void pushAnItem(Object listInformation) {
+		Stack node=new Stack();
+		node.listInformation=listInformation;
+		if(top==null) {
+			top=node;
+			node.addressOfNextNode=null;
+		}
+		else {
+			node.addressOfNextNode=top;
+			top=node;
+		}
 	}
 	public void pushAnItem(char listInformationInChar) {
 		Stack node=new Stack();
@@ -22,19 +34,21 @@ class Stack {
 		}
 	}
 	public Stack popAnItem() {
-		Stack topItem=null;
+		Stack stackTopElement;
 		if(top==null) {
-			System.out.println("Stack is Empty");
+			stackTopElement=null;
+			return stackTopElement;
 		}
 		else if(top.addressOfNextNode==null) {
-			topItem= top;
+			stackTopElement=top;
 			top=null;
+			return stackTopElement;
 		}
 		else {
-			topItem=top;
+			stackTopElement=top;
 			top=top.addressOfNextNode;
+			return stackTopElement;
 		}
-		return topItem;
 	}
 	public void display() {
 		if(top==null) {
@@ -43,14 +57,13 @@ class Stack {
 		else {
 			Stack traversingNode=top;
 			while(traversingNode!=null) {
-				System.out.println(traversingNode.listInformationInChar);
+				System.out.println(traversingNode.listInformation);
 				traversingNode=traversingNode.addressOfNextNode;
 			}
 		}
 	}
 }
 class Precedence {
-	//method to return precedence of operands
 	public int getPrcedence(char operand) {
 		int precendendeNumber=0;
 		switch(operand) {
@@ -64,15 +77,14 @@ class Precedence {
 			break;
 		case '%':precendendeNumber=3;
 			break;
-		case ')':precendendeNumber=4;
+		case ')':precendendeNumber=0;
 			break;
-		case '(':precendendeNumber=4;
+		case '(':precendendeNumber=0;
 		break;
 		}
 		return precendendeNumber;
 	}
 }
-//class to convert infix to postfix
 public class InfixToPostfix extends StackUsingLinkedList{
 	public static void main(String args[]) {
 		Stack stack=new Stack();
@@ -80,36 +92,41 @@ public class InfixToPostfix extends StackUsingLinkedList{
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Enter Infix String");
 		String infixString=sc.next();
-		int sizeOfInfixString=infixString.length();
-		int precendenceOfInfixElement,precendenceOfTopElement,counter=0;
-		char currrentInfixStringCharacter,topOfStack;
-		sizeOfInfixString=infixString.length();
 		String postFixString="";
-		while(sizeOfInfixString!=0) {
-			currrentInfixStringCharacter=infixString.charAt(counter);
-			counter++;
-			sizeOfInfixString--;
-			if((currrentInfixStringCharacter=='+'||currrentInfixStringCharacter=='-'||currrentInfixStringCharacter=='*'||currrentInfixStringCharacter=='/'||currrentInfixStringCharacter=='%') && stack.top==null) {
-				stack.pushAnItem(currrentInfixStringCharacter);
-			}
-			else if(currrentInfixStringCharacter=='+'||currrentInfixStringCharacter=='-'||currrentInfixStringCharacter=='*'||currrentInfixStringCharacter=='/'||currrentInfixStringCharacter=='%') {
-				precendenceOfInfixElement=precedenceObject.getPrcedence(currrentInfixStringCharacter);
-				topOfStack=stack.top.listInformationInChar;
-				precendenceOfTopElement=precedenceObject.getPrcedence(topOfStack);
-				while(stack.top!=null && precendenceOfTopElement>=precendenceOfInfixElement) {
-					postFixString=postFixString+stack.top.listInformationInChar;
+		int precendencrOfInfixElement,precendencrOfTopElement,infixStingLength=infixString.length();
+		int i=0;
+			while(infixStingLength!=0)
+			{
+				char currentInfixCharacter=infixString.charAt(i);
+				i++;
+				infixStingLength--;
+				if(currentInfixCharacter=='(')
+					stack.pushAnItem(currentInfixCharacter);
+				else if(currentInfixCharacter==')') {
+					while(stack.top!=null && stack.top.listInformationInChar!='(') {
+						postFixString=postFixString+stack.popAnItem().listInformationInChar;
+					}
 					stack.popAnItem();
 				}
-				stack.pushAnItem(currrentInfixStringCharacter);
+				else if((currentInfixCharacter=='+'||currentInfixCharacter=='-'||currentInfixCharacter=='*'||currentInfixCharacter=='/'||currentInfixCharacter=='%'||currentInfixCharacter=='('||currentInfixCharacter==')') && stack.top==null) {
+			    	stack.pushAnItem(currentInfixCharacter);
+			    }
+			    else if(currentInfixCharacter=='+'||currentInfixCharacter=='-'||currentInfixCharacter=='*'||currentInfixCharacter=='/'||currentInfixCharacter=='%') {
+			    	precendencrOfInfixElement=precedenceObject.getPrcedence(currentInfixCharacter);
+			    	precendencrOfTopElement=precedenceObject.getPrcedence(stack.top.listInformationInChar);
+			    	while(stack.top!=null && precendencrOfTopElement>=precendencrOfInfixElement && stack.top.listInformationInChar!='(') {
+			    		postFixString=postFixString+stack.popAnItem().listInformationInChar;
+			    	}
+			    	stack.pushAnItem(currentInfixCharacter);
+			    }
+			    else {
+			    	postFixString=postFixString+currentInfixCharacter;
+			    }
 			}
-			else
-				postFixString=postFixString+" "+currrentInfixStringCharacter;
+			if(stack.top!=null){
+			while(stack.top!=null) 
+				postFixString=postFixString+stack.popAnItem().listInformationInChar;}
+			System.out.println(postFixString);
 		}
-		if(stack.top!=null) {
-			while(stack.top!=null) {
-				postFixString=postFixString+" "+stack.popAnItem().listInformationInChar;
-			}
 	}
-		System.out.println(postFixString);
-	}
-}
+
