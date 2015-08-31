@@ -1,14 +1,17 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 //class used to define a stack and its operation
-class StackUsingLinkedList {
+class Node {
+	Node addressOfNextNode,top;
 	Object listInformation;
-	StackUsingLinkedList addressOfNextNode,top;
+}
+class StackUsingLinkedList extends Node{
+	
 	public StackUsingLinkedList() { //constructor to initialize stack
 		top=null;
 	}
 	//method to used add an item 
-	public void pushAnItem(String listInformation) {
+	public void pushAnItem(int listInformation) {
 		StackUsingLinkedList node=new StackUsingLinkedList();
 		node.listInformation=listInformation;
 		if(top==null) {
@@ -21,14 +24,20 @@ class StackUsingLinkedList {
 		}
 	}
 	//method to remove an item
-	public void popAnItem() {
-		if(top==null) 
-			System.out.println("Stack is Empty");
+	public Object popAnItem() {
+		Object poppedItem=null;
+		if(top==null) {
+			return poppedItem;
+		}
 		else if(top.addressOfNextNode==null) {
+			poppedItem=top.listInformation;
 			top=null;
+			return poppedItem;
 		}
 		else {
+			poppedItem=top.listInformation;
 			top=top.addressOfNextNode;
+			return poppedItem;
 		}
 	}
 	// method to display stack items
@@ -37,7 +46,7 @@ class StackUsingLinkedList {
 			System.out.println("Stack is empty");
 		}
 		else {
-			StackUsingLinkedList traversingNode=top;
+			Node traversingNode=top;
 			while(traversingNode!=null) {
 				System.out.println(traversingNode.listInformation);
 				traversingNode=traversingNode.addressOfNextNode;
@@ -50,29 +59,19 @@ public class MainStackImplementation {
 		Scanner sc=new Scanner(System.in);
 		StackUsingLinkedList stackUsingLinkedListObject=new StackUsingLinkedList();
 		try {
-			// menu for options
-			while(true) {
-				System.out.println("Enter your choise");
-				System.out.println("1:Push an Item\n2:Pop an Item\n3:display\n4:Exit");
-				int choise=sc.nextInt();
-				switch(choise) {
-				case 1:
-					System.out.println("Enter information");
-					String listInformation=sc.next();
-					stackUsingLinkedListObject.pushAnItem(listInformation);
-					break;
-				case 2:
-					stackUsingLinkedListObject.popAnItem();
-					break;
-				case 3:
+					stackUsingLinkedListObject.pushAnItem(1);
+					stackUsingLinkedListObject.pushAnItem(2);
+					stackUsingLinkedListObject.pushAnItem(3);
+					stackUsingLinkedListObject.pushAnItem(4);
+					stackUsingLinkedListObject.pushAnItem(5);
 					stackUsingLinkedListObject.display();
-					break;
-				case 4:
-					System.exit(0);
-				default:
-					System.out.println("Please Enter correct choise");
-				}
-			}
+					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
+					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
+					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
+					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
+					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
+					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
+					stackUsingLinkedListObject.display();
 		}catch(InputMismatchException exception){System.out.println("Please enter only values given at screen");}
 	}
 }
