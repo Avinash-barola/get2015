@@ -1,4 +1,5 @@
 
+
 import java.util.*;
 public class Queue {
 	Object queue[];// make a object type of array to hold all type of values
@@ -77,44 +78,17 @@ public class Queue {
 		Scanner sc = new Scanner(System.in);
 		Queue queue = new Queue();
 		try {
-			while(true) {				// make a menu for select particular operations
-				System.out.print("\n 1. Enqueue\n 2. Dequeue\n 3. Make Empty\n 4. Get Front Item\n 5. Display Queue\n 6. Exit");
-				System.out.print("\n Enter your choise : ");
-				choise = sc.nextInt();
-				switch(choise) {
-				case 1:
-					System.out.print("\n Enter Item value : ");
-					queueInformation = sc.nextInt();
-					queue.enqueue(queueInformation); 
-					break;
-				case 2:
-					queueInformation = queue.dequeue();
-					if( queueInformation == null ) {
-						System.out.print("\n Queue is Empty ");
-					}
-					else {
-						System.out.print("\n Dequeue Item is : "+queueInformation);
-					}
-					break;
-				case 3:
-					queue.makeEmpty(); 
-					break;
-				case 4:
-					queueInformation= queue.getFront();
-					if( queueInformation == null ) {
-						System.out.print("\n Queue is Empty ");
-					}
-					else {
-						System.out.print("\n Front Item is : "+queueInformation);
-					}
-					break;
-				case 5:
+					queue.enqueue(1); 
+					queue.enqueue(2); 
+					queue.enqueue(3); 
+					queue.enqueue(4); 
+					queue.enqueue(5); 
+					queue.display();
+					System.out.println("Dequeued item is "+queue.dequeue());
+					System.out.println("Front item is "+queue.getFront());
 					queue.display(); 
-					break;
-				case 6:
-					System.exit(0);
-				}
-			}	
+					queue.makeEmpty();
+					queue.display();
 		}
 		catch(Exception exception)
 		{
@@ -123,4 +97,6 @@ public class Queue {
 	}
 
 }
+		
+
 		
