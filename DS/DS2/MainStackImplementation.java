@@ -2,57 +2,62 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 //class used to define a stack and its operation
 class Node {
-	Node addressOfNextNode,top;
-	Object listInformation;
+	Node addressOfNextNode;
+	public static Node top;
+	Object nodeInformation;
+	Node()
+	{
+		top = null;
+	}
+	Node(Object nodeInformation) {
+		this.nodeInformation=nodeInformation;
+	}
 }
 class StackUsingLinkedList extends Node{
-	
-	public StackUsingLinkedList() { //constructor to initialize stack
-		top=null;
-	}
+	Node nodeObject = new Node();
 	//method to used add an item 
-	public void pushAnItem(int listInformation) {
-		StackUsingLinkedList node=new StackUsingLinkedList();
-		node.listInformation=listInformation;
+	public void pushAnItem(Object nodeInformation) {
+		Node newNode=new Node(nodeInformation);
 		if(top==null) {
-			top=node;
-			node.addressOfNextNode=null;
+			top=newNode;
+			newNode.addressOfNextNode=null;
 		}
 		else {
-			node.addressOfNextNode=top;
-			top=node;
+			newNode.addressOfNextNode=top;
+			top=newNode;
 		}
+	}
+	public boolean isEmpty()
+	{
+		boolean isEmpty = false;
+		if( top == null )
+		{
+			isEmpty = true;
+		}
+		return isEmpty;
 	}
 	//method to remove an item
 	public Object popAnItem() {
 		Object poppedItem=null;
-		if(top==null) {
-			return poppedItem;
+		boolean isEmpty;
+		isEmpty = isEmpty();
+		
+		if( isEmpty == true)
+		{
+			return "Stack is empty";
 		}
 		else if(top.addressOfNextNode==null) {
-			poppedItem=top.listInformation;
+			poppedItem=top.nodeInformation;
 			top=null;
 			return poppedItem;
 		}
 		else {
-			poppedItem=top.listInformation;
+			poppedItem=top.nodeInformation;
 			top=top.addressOfNextNode;
 			return poppedItem;
 		}
 	}
-	// method to display stack items
-	public void display() {
-		if(top==null) {
-			System.out.println("Stack is empty");
-		}
-		else {
-			Node traversingNode=top;
-			while(traversingNode!=null) {
-				System.out.println(traversingNode.listInformation);
-				traversingNode=traversingNode.addressOfNextNode;
-			}
-		}
-	}
+	
 }
 public class MainStackImplementation {
 	public static void main(String args[]) {
@@ -64,14 +69,13 @@ public class MainStackImplementation {
 					stackUsingLinkedListObject.pushAnItem(3);
 					stackUsingLinkedListObject.pushAnItem(4);
 					stackUsingLinkedListObject.pushAnItem(5);
-					stackUsingLinkedListObject.display();
 					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
 					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
 					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
 					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
 					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
 					System.out.println("Popped item is "+stackUsingLinkedListObject.popAnItem());
-					stackUsingLinkedListObject.display();
 		}catch(InputMismatchException exception){System.out.println("Please enter only values given at screen");}
 	}
 }
+
