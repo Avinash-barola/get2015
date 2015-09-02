@@ -1,18 +1,25 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 //class to create a binary search tree and its operation
-class Preorder {
+class Node {
 	Object nodeInformation;
-	Preorder rightChildAddress,leftChildAddress;
-	static Preorder rootNode;
-	Preorder() {
+	Node rightChildAddress,leftChildAddress,rootNode;
+	public Node() {
 		rootNode=null;
-	}	
+	}
+	public Node getNewNode(Object nodeInformation) {
+		Node newNode=new Node();
+		newNode.nodeInformation=nodeInformation;
+		return newNode;
+	}
+}
+class Preorder {
+	String result="";
+	Node nodeObject=new Node();
 	//to insert a new node in tree
-	public Preorder insertNode(Preorder node,Object nodeInformation) {	
+	public Node insertNode(Node node,Object nodeInformation) {	
 		if(node==null) {       //base condition of recursive method
-			node=new Preorder();
-			node.nodeInformation=nodeInformation;
+			node=nodeObject.getNewNode(nodeInformation);
 			node.leftChildAddress=null;
 			node.rightChildAddress=null;
 		}
@@ -25,36 +32,32 @@ class Preorder {
 		return node;
 	}		
 	//to show preorder traversal
-	public void displayPreorderTraversal(Preorder node) {
+	public String displayPreorderTraversal(Node node) {
 		if(node!=null) {
-			System.out.print(node.nodeInformation+"->");
-			displayPreorderTraversal(node.leftChildAddress);
+			result=result+node.nodeInformation+"->";
+			displayPreorderTraversal(node.leftChildAddress);                                                                                   
 			displayPreorderTraversal(node.rightChildAddress);
 		}	
+		return result;
 	}
 	public static void main(String args[]) {
 		Scanner sc=new Scanner(System.in);
+		Node nodeObject=new Node();
 		Preorder preorderObject=new Preorder();
 		System.out.println("Enter Choise");
 		try {
-			while(true) {
-				System.out.println("\n1:Insert a node\n2:Preorder display\n3:exit");
-				int choise=sc.nextInt();
-				switch(choise) {
-				case 1:
-					System.out.println("Enter value");
-					int nodeInformation=sc.nextInt();
-					rootNode=preorderObject.insertNode(rootNode,nodeInformation);
-					break;
-				case 2:
-					preorderObject.displayPreorderTraversal(rootNode);
-					break;
-				case 3:
-					System.exit(0);
-					break;
-				default:System.out.println("Enter correct choise");
-				}
-			}
-		}catch(InputMismatchException exception) {System.out.println("Please Enter only screen values");}
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,8);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,9);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,3);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,1);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,10);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,5);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,4);
+				nodeObject.rootNode=preorderObject.insertNode(nodeObject.rootNode,0);
+	
+				String result=preorderObject.displayPreorderTraversal(nodeObject.rootNode);
+				System.out.println("Preorder Traversal is :"+result);
+		}catch(Exception exception) {System.out.println("Please Enter only Integer values");}
 	}
 }
+
