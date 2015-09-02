@@ -34,23 +34,24 @@ public class BinaryTree extends Node{
 		return inorderItem;
 	}
 	//Method to check trees are mirror image or not
-	void mirrorImage( BinaryTree binaryTree2 ) {
+	boolean mirrorImage( BinaryTree binaryTree2 ) {
 		String tree1, tree2;
+		boolean isMirrorImage=false;
 		tree1 = inorder( rootNode );
 		tree2 = binaryTree2.inorder( binaryTree2.rootNode );
 		tree2 = new StringBuffer(tree2).reverse().toString();
 		if( tree1.length() == tree2.length() ) {
 				if( tree1.equals(tree2) ) {
-					System.out.print("\n mirror image ");
-					return;
+					isMirrorImage=true;
+					return isMirrorImage;
 				}
 				else
 				{
-					System.out.print("\n Not mirror image ");
+					return isMirrorImage;
 				}
 			}
 		else {
-			System.out.print("\n Not mirror image");
+			return isMirrorImage;
 		}
 	}
 	public static void main(String[] args) {
@@ -75,7 +76,14 @@ public class BinaryTree extends Node{
 					binaryTree2.rootNode = binaryTree2.insert( binaryTree2.rootNode, item );
 					break;
 				case 3:
-					binaryTree1.mirrorImage(binaryTree2); break;
+					boolean isMirrorImage=binaryTree1.mirrorImage(binaryTree2); 
+					if(isMirrorImage) {
+						System.out.println("yes Mirror Image");
+					}
+					else {
+						System.out.println("no mirror Image");
+					}
+					break;
 				case 4:
 					System.exit(0); break;
 				default:System.out.println("PLease enter only integer value");
@@ -87,3 +95,4 @@ public class BinaryTree extends Node{
 	}
 
 }
+
