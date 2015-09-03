@@ -48,7 +48,7 @@ public class BinarySearch {
 			}
 		}catch(InputMismatchException exception){System.out.println("Enter only Integer value");return;}
 		int[] list=new int[sizeOfList];
-		System.out.println("Enter Item in list");
+		System.out.println("Enter Item in list in sorted manner");
 		BinarySearch.addElement(list,sc);
 		System.out.println("Enter item to be search");
 		try {
