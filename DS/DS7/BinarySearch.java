@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 //class to search an item using binary search
@@ -5,13 +6,10 @@ public class BinarySearch {
 	static int result=-1;  //result used to hold the result
 	//method to add element in list
 	private static int [] addElement(int[] list,Scanner sc) {
-		try {
 			for(int i=0;i<list.length;i++) {
 				list[i]=sc.nextInt();
 			}
-		}catch(InputMismatchException exception) {
-			System.out.println("Enter only Integer value");
-		}
+			Arrays.sort(list);
 		return list;
 	}
 	//method to find an item
@@ -24,6 +22,7 @@ public class BinarySearch {
 			else if(list[midIndex]==item) { //to check if another item is available left side or not
 				result=midIndex+1;
 				searchItem(item, list,startIndex,midIndex-1);
+				return result;
 			}
 			else if(list[midIndex]>item)
 					searchItem(item, list,startIndex,midIndex-1);
@@ -46,12 +45,14 @@ public class BinarySearch {
 					isPositive=true;
 				}
 			}
-		}catch(InputMismatchException exception){System.out.println("Enter only Integer value");return;}
 		int[] list=new int[sizeOfList];
-		System.out.println("Enter Item in list in sorted manner");
+		System.out.println("Enter Item in list in sorted manner:");
+		System.out.println("List in sorted manner:");
 		BinarySearch.addElement(list,sc);
+		for(int i=0;i<list.length;i++) {
+			System.out.println(list[i]);
+		}
 		System.out.println("Enter item to be search");
-		try {
 			int item=sc.nextInt();
 			isItemFound=BinarySearch.searchItem(item,list,0,list.length-1);
 		}catch(InputMismatchException exception){System.out.println("Please Enter only integer value");return;}
@@ -61,4 +62,5 @@ public class BinarySearch {
 			System.out.println("Item found at "+isItemFound);
 		}
 	}
+
 
