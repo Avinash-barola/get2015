@@ -30,19 +30,19 @@ public class BubbleSortTest {
 	public void bubbleSortTest1() {
 		int list[]={7,6,5,4,3,2,1,0};
 		int expected[]={0,1,2,3,4,5,6,7};
-		assertArrayEquals( expected,BubbleSort.bubbleSort(list));
+		assertArrayEquals("Positive test case for Tree Sort", expected,BubbleSort.bubbleSort(list));
 	}
 	@Test
 	public void bubbleSortTest2() {
 		int list[]={};
 		int expected[]={};
-		assertArrayEquals( expected,BubbleSort.bubbleSort(list));
+		assertArrayEquals("Negative test case for Tree Sort", expected,BubbleSort.bubbleSort(list));
 	}
 	@Test
 	public void bubbleSortTest3() {
 		int list[]={8,8,8,8,8,8,1,1,2,2,8,8};
 		int expected[]={1,1,2,2,8,8,8,8,8,8,8,8};
-		assertArrayEquals( expected,BubbleSort.bubbleSort(list));
+		assertArrayEquals("Positive test case for Tree Sort", expected,BubbleSort.bubbleSort(list));
 	}
 
 
