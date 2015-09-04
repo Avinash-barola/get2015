@@ -1,13 +1,12 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 //class to create a binary tree
-public class BinaryTree extends Node{
+public class BinaryTree {
 	Node nodeObject=new Node();
 	int countNode = 1;//variable to count total number of nodes
 	String inorderItem = "";
 	//method to insert a node in binary tree
-	public Node insert ( Node node,Object nodeInformation) {
+	public Node insert ( Node node,Integer nodeInformation) {
 		if( node == null ) {    //base condition of recursive method
 			node= nodeObject.getNewNode(nodeInformation);
 			node.leftChildAddress = null;
@@ -24,7 +23,7 @@ public class BinaryTree extends Node{
 		}
 		return node;
 	}
-	//method to show inorder traversal
+	//method to show in order traversal
 	String inorder( Node node ) {
 		if( node != null ) {
 			inorder( node.leftChildAddress );
@@ -34,11 +33,11 @@ public class BinaryTree extends Node{
 		return inorderItem;
 	}
 	//Method to check trees are mirror image or not
-	boolean mirrorImage( BinaryTree binaryTree2 ) {
+	boolean mirrorImage(BinaryTree binaryTree1, BinaryTree binaryTree2 ) {
 		String tree1, tree2;
 		boolean isMirrorImage=false;
-		tree1 = inorder( rootNode );
-		tree2 = binaryTree2.inorder( binaryTree2.rootNode );
+		tree1 = binaryTree1.inorder(binaryTree1.nodeObject.rootNode );
+		tree2 = binaryTree2.inorder( binaryTree2.nodeObject.rootNode );
 		tree2 = new StringBuffer(tree2).reverse().toString();
 		if( tree1.length() == tree2.length() ) {
 				if( tree1.equals(tree2) ) {
@@ -55,11 +54,12 @@ public class BinaryTree extends Node{
 		}
 	}
 	public static void main(String[] args) {
-		int choise;
-		Scanner sc = new Scanner(System.in);
-		BinaryTree binaryTree1=new BinaryTree();
-		BinaryTree binaryTree2=new BinaryTree();
-		//try {
+		try {
+			int choise;
+			Scanner sc = new Scanner(System.in);
+			BinaryTree binaryTree1=new BinaryTree();
+			BinaryTree binaryTree2=new BinaryTree();
+			BinaryTree binaryTreeObject=new BinaryTree();
 			while(true) {
 				System.out.print("\n 1. Insert in first tree\n 2. Insertion in second tree\n 3. Check Mirror Image\n 4. Exit");
 				System.out.print("\n Enter your choice : ");
@@ -67,16 +67,16 @@ public class BinaryTree extends Node{
 				switch(choise) { 
 				case 1:
 					System.out.print("\n Enter node value : ");
-					Object item = sc.nextInt();
-					binaryTree1.rootNode = binaryTree1.insert( binaryTree1.rootNode, item );
+					int item = sc.nextInt();
+					binaryTree1.nodeObject.rootNode = binaryTree1.insert( binaryTree1.nodeObject.rootNode, item );
 					break;
 				case 2:
 					System.out.print("\n Enter node value : ");
 					item = sc.nextInt();
-					binaryTree2.rootNode = binaryTree2.insert( binaryTree2.rootNode, item );
+					binaryTree2.nodeObject.rootNode = binaryTree2.insert( binaryTree2.nodeObject.rootNode, item );
 					break;
 				case 3:
-					boolean isMirrorImage=binaryTree1.mirrorImage(binaryTree2); 
+					boolean isMirrorImage=binaryTreeObject.mirrorImage(binaryTree1,binaryTree2); 
 					if(isMirrorImage) {
 						System.out.println("yes Mirror Image");
 					}
@@ -89,10 +89,7 @@ public class BinaryTree extends Node{
 				default:System.out.println("PLease enter only integer value");
 				}
 			}
-			
-		//}//catch(Exception e){System.out.println("Please enter correct value");}
-
+		}catch(InputMismatchException exception){System.out.println("Enter only integer value");}
+		
 	}
-
 }
-
