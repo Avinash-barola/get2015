@@ -1,11 +1,30 @@
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+class ManageJob {
+	public String currentJob(PriorityQueue<Integer> priorityQueueObj) {
+		String result="";
+		int size = priorityQueueObj.size(); // take a size of priority queue
+		if( size == 0 ) {  // is size is zero than print queue is empty
+			result="Queue is empty";
+		}
+		result="Current job to be serviced is: "+priorityQueueObj.peek();// else print the first element in queue
+		return result;
+	}
+	public String toServiceJob(PriorityQueue<Integer> priorityQueueObj) {
+		String result="";
+		int size = priorityQueueObj.size();	// take a size of priority queue
+		if( size == 0 ) {		// is size is zero than print queue is empty
+			result="Queue is empty";
+		}
+		result="Current Serviced Job is: "+priorityQueueObj.poll(); // else serviced the top priority job and print it
+		return result;
+	}
+}
 public class PriorityPrinter {
-
-	public static void main(String[] args) {
-		
+	public static void input() {
 		Scanner sc = new Scanner(System.in);
+		ManageJob manageJobObject=new ManageJob();
 		PriorityQueue<Integer> priorityQueueObj = new PriorityQueue<Integer>( 10, Collections.reverseOrder() );// make a priority queue which holds job in descending order according to job priority
 		int numberOfJobs; 
 		int jobPriority;	// holds particular job priority entered by user
@@ -68,21 +87,11 @@ public class PriorityPrinter {
 						} while(jobPriority <= 0 || jobPriority >= 5);
 						priorityQueueObj.add(jobPriority);
 					case 2:
-						size = priorityQueueObj.size(); // take a size of priority queue
-						if( size == 0 ) {  // is size is zero than print queue is empty
-							System.out.println("Queue is empty");
-							break;
-						}
-						System.out.println("Current job to be serviced is: "+priorityQueueObj.peek());// else print the first element in queue
+						System.out.println(manageJobObject.currentJob(priorityQueueObj));
 						break;
 					
 					case 3:
-						size = priorityQueueObj.size();	// take a size of priority queue
-						if( size == 0 ) {		// is size is zero than print queue is empty
-							System.out.println("Queue is empty");
-							break;
-						}
-						System.out.println("Current Serviced Job is: "+priorityQueueObj.poll()); // else serviced the top priority job and print it
+						System.out.println(manageJobObject.toServiceJob(priorityQueueObj));
 						break;
 						
 					case 4:
@@ -100,4 +109,8 @@ public class PriorityPrinter {
 			sc.close();
 		}
 	}
+	public static void main(String[] args) {
+		input();
+	}
 }
+
