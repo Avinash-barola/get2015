@@ -30,19 +30,19 @@ public class QuickSortTest {
 		int list[]={7,6,5,4,3,2,1,0};
 		int expected[]={0,1,2,3,4,5,6,7};
 		int actual[]=QuickSort.quickSort(list,0,list.length-1);
-		assertArrayEquals( expected,actual);
+		assertArrayEquals("Positive test case for Quick Sort", expected,actual);
 	}
 	@Test
 	public void quickSortTest2() {
 		int list[]={0};
 		int expected[]={0};
-		assertArrayEquals( expected,QuickSort.quickSort(list, 0, list.length-1));
+		assertArrayEquals("Negative test case for Quick Sort", expected,QuickSort.quickSort(list, 0, list.length-1));
 	}
 	@Test
 	public void quickSortTest3() {
 		int list[]={9,8,7,6,5,4,3,2,1};
 		int expected[]={1,2,3,4,5,6,7,8,9};
-		assertArrayEquals( expected,QuickSort.quickSort(list,0,list.length-1));
+		assertArrayEquals("Positive test case for Quick Sort", expected,QuickSort.quickSort(list,0,list.length-1));
 	}
 
 }
