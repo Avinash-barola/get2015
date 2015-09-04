@@ -30,18 +30,18 @@ public class RadixSortTest {
 		int list[]={-7,6,5,4,3,2,1,0};
 		int expected[]={-7,6,5,4,3,2,1,0};
 		int actual[]=RadixSort.radixSort(list,7);
-		assertArrayEquals( expected,actual);
+		assertArrayEquals( "Negative test case for Tree Sort",expected,actual);
 	}
 	@Test
 	public void quickSortTest2() {
 		int list[]={0};
 		int expected[]={0};
-		assertArrayEquals( expected,RadixSort.radixSort(list,0));
+		assertArrayEquals( "Negative test case for Tree Sort",expected,RadixSort.radixSort(list,0));
 	}
 	@Test
 	public void quickSortTest3() {
 		int list[]={9,8,7,6,5433,4,3,2,105};
 		int expected[]={2,3,4,6,7,8,9,105,5433};
-		assertArrayEquals(expected,RadixSort.radixSort(list,5433));
+		assertArrayEquals("Positive test case for Tree Sort",expected,RadixSort.radixSort(list,5433));
 	}
 }
