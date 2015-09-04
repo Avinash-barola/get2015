@@ -34,7 +34,7 @@ public class BinarySearchTreeTest {
 		for(int i=0;i<list.length;i++)
 		nodeObject.rootNode=binaryTreeObject.insertNode(nodeObject.rootNode,list[i]);
 		String result=binarySearchTreeObject.inorder(nodeObject.rootNode);
-		assertEquals("0 1 2 2 3 4 4 4 9 ", result);
+		assertEquals("Positive test case for Tree Sort","0 1 2 2 3 4 4 4 9 ", result);
 	}
 	@Test
 	public void treeSortTest2() {
@@ -45,7 +45,7 @@ public class BinarySearchTreeTest {
 		for(int i=0;i<list.length;i++)
 		nodeObject.rootNode=binaryTreeObject.insertNode(nodeObject.rootNode,list[i]);
 		String result=binarySearchTreeObject.inorder(nodeObject.rootNode);
-		assertEquals("", result);
+		assertEquals("Negative test case for Tree Sort","", result);
 	}
 	@Test
 	public void treeSortTest3() {
@@ -56,7 +56,7 @@ public class BinarySearchTreeTest {
 		for(int i=0;i<list.length;i++)
 		nodeObject.rootNode=binaryTreeObject.insertNode(nodeObject.rootNode,list[i]);
 		String result=binarySearchTreeObject.inorder(nodeObject.rootNode);
-		assertEquals("0 1 2 3 4 5 6 7 8 9 ", result);
+		assertEquals("Positive test case for Tree Sort","0 1 2 3 4 5 6 7 8 9 ", result);
 	}
 
 }
