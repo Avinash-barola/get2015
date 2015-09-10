@@ -21,10 +21,10 @@ SELECT * FROM publisher;
 
 
 -- set subtitution variable
-SET @publication1:='SHARMA';
-SET @publication2:='JAIN';
-SET @publication3:='MITTAL';
-SET @publication4:='PANDIT'; 
+SET @publication_name1:='SHARMA';
+SET @publication_name2:='JAIN';
+SET @publication_name3:='MITTAL';
+SET @publication_name4:='PANDIT'; 
 
 SET @pblisherID1:=1001;
 SET @pblisherID2:=1002;
@@ -33,9 +33,9 @@ SET @pblisherID4:=1004;
 
 
 -- again insert values in publishers by substitution variable
-INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID1,@pblisherID1);
-INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID2,@pblisherID2);
-INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID3,@pblisherID3);
-INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID4,@pblisherID4);
+INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID1,@publication_name1);
+INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID2,@publication_name2);
+INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID3,@publication_name3);
+INSERT INTO publisher(publisher_id,publisher_name)VALUES(@pblisherID4,@publication_name4);
 
 SELECT * FROM publisher;
