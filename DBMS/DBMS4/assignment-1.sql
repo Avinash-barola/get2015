@@ -39,7 +39,7 @@ GROUP BY bi.member_id,bi.accession_no,bi.issue_date;
 
 -- SELECT command to display information of those books
 -- whose price is equal to the most expensive book purchase so far.
-SELECT accession_no,title_id,purchase_date,price 
+SELECT * 
 FROM books WHERE price = (SELECT MAX(price) FROM books);
 
 
