@@ -50,10 +50,10 @@ public class Car extends Vehicle {
 		return super.calculateOnRoadPrice() + onRoadPrice;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return super.toString() + " AC=" + AC + ", powerSteering="
 				+ powerSteering + ", accessoryKit=" + accessoryKit;
-	}
+	}*/
 
 }
