@@ -14,6 +14,6 @@ WHERE DATEDIFF(b.due_date,b.issue_date)>60;
 -- to display list of books having greater price then the minimum price of book purchased so far
 SELECT accession_no,price,purchase_date
 FROM books b
-HAVING price > (SELECT MIN(price) FROM books HAVING MAX(purchase_date));
+WHERE price > (SELECT MIN(price) FROM books);
 
 
