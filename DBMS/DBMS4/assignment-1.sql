@@ -24,8 +24,8 @@ GROUP BY bi.member_id,bi.accession_no,bi.issue_date;
 -- SELECT command to display information on the books
 -- that have been returned after their due dates. The information
 -- should include book issue date, title, member name and due date.
-SELECT br.issue_date, m.member_name,bi.due_date,t.title_name
-FROM book_issue bi,book_return br,members m,titles t,books b
+SELECT bi.issue_date, m.member_name,bi.due_date,t.title_name
+FROM book_issue bi,members m,titles t,books b
 WHERE m.member_id=bi.member_id 
 AND b.accession_no=bi.accession_no 
 AND b.title_id=t.title_id 
