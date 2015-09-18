@@ -7,10 +7,9 @@ SELECT member_name FROM members WHERE category = (SELECT category FROM members W
 -- that have not been returned till date. The information should
 -- include book issue date, title, member name and due date.
 USE library;
-SELECT bi.issue_date, m.member_name,bi.due_date,t.title_name,bi.accession_no,m.member_id
+SELECT bi.issue_date, m.member_name,bi.due_date,t.title_name
 FROM book_issue bi,book_return br,members m,titles t,books b
 WHERE m.member_id=bi.member_id 
-AND b.accession_no=bi.accession_no 
 AND b.title_id=t.title_id 
 AND(bi.member_id,bi.issue_date,bi.accession_no) 
 NOT IN (
