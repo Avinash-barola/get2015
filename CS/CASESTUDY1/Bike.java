@@ -24,7 +24,7 @@ public class Bike extends Vehicle {
 	public double calculateOnRoadPrice() {
 		double onRoadPrice = 0;
 		if (isSelfStart()) {						// if bike is self start than increase road tax with 1000
-			onRoadPrice = onRoadPrice + 1000;
+			onRoadPrice = 1000;
 
 		}
 
