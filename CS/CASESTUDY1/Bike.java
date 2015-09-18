@@ -32,10 +32,10 @@ public class Bike extends Vehicle {
 		return super.calculateOnRoadPrice() + onRoadPrice;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return super.toString() + " selfStart=" + selfStart + ", helmetPrize="
 				+ helmetPrize;
-	}
+	}*/
 
 }
