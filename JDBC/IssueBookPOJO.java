@@ -1,11 +1,11 @@
 package com.metacube.jdbc.example;
 
-public class IssueBookPOJO {
+public class IssueBooks {
 	static boolean isIssued=false;
 	public boolean getIssued() {
 		return isIssued;
 	}
 	public void setIssued(boolean isIssued) {
-		IssueBookPOJO.isIssued = isIssued;
+		IssueBooks.isIssued = isIssued;
 	}
 }
