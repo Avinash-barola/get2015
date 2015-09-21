@@ -8,12 +8,13 @@ public class ConnectionUtil {
 
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/library";
 	private static final String USER = "root";
-	private static final String PASSWORD = "mysql";		
+	private static final String PASSWORD = "mysql";	
+	private static final String DRIVER = "com.mysql.jdbc.Driver";	
 	private Connection con = null;
 	public Connection getConnection() {
 		/* register driver */
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
