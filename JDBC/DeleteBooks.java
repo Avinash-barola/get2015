@@ -5,15 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class DeleteBooks {
 	public static void main(String[] args) throws IOException {
-		getDeletedBooks();
-		if(getDeletedBooks())
+		if(isBookDeleted())
 		System.out.println(DeleteBook.getNumberOfBooksDeleted()+" Book Deleted Successfully");
 		else
 			System.out.println("No book deleted");
 	}
 	/* execute query using prepared statement*/
 	/*method to get number of books deleted*/
-	private static boolean getDeletedBooks() {
+	private static boolean isBookDeleted() {
 		Connection con = null;
 		boolean isDeleted=false;
 		PreparedStatement ps = null;
