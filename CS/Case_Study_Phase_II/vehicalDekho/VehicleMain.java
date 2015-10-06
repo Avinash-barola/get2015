@@ -1,24 +1,16 @@
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import helper.MyException;
 import helper.VehicleHelper;
 import helper.VehicleJDBCHelper;
 import helper.VehicleType;
 import model.Vehicle;
 import VehicleXML.ReadInputXml;
-
-
-
 public class VehicleMain {
 
 	public static void main(String[] args) throws MyException {
-		// TODO Auto-generated method stub
-		
-		
 		Vehicle vehicleObj1 = VehicleHelper.createVehicle(VehicleType.Bike, "apacheRTR", "TVS");
 		Vehicle vehicleObj2 = VehicleHelper.createVehicle(VehicleType.Bike, "Pulsar", "Bajaj");
 		Vehicle vehicleObj3 = VehicleHelper.createVehicle(VehicleType.Bike, "apacheRTR", "TVS");
@@ -44,33 +36,6 @@ public class VehicleMain {
 		
 		vehicle = VehicleHelper.createVehicle(VehicleType.Car, "i10", "Hyundai");
 		VehicleJDBCHelper.create(vehicle);
-		
-		/* perform searching operations on database using VehicleJDBCHelper*/
-		List<Vehicle> vehicles = VehicleJDBCHelper.searchByMakeAndModel("TVS", "apache");
-		System.out.println("\n Searching of TVS apache :  ");
-		for(Vehicle vehicleItems : vehicles)
-		{
-			System.out.print(vehicleItems+"\n");
-		}
-		
-		vehicles = VehicleJDBCHelper.searchByMakeAndModel("Hyundai", "i10");
-		System.out.println("\n Searching of Hyundai i10 :  ");
-		for(Vehicle vehicleItems : vehicles)
-		{
-			System.out.print(vehicleItems+"\n");
-		}
-		
-		/* perform update operation*/
-		int updatedRows = VehicleJDBCHelper.updateByMake("TVS");
-		System.out.println("\n Total no of updated records are : "+updatedRows);
-		
-		/* perform delete operation*/
-		int deletedRows = VehicleJDBCHelper.deleteByMake("Hyundai");
-		System.out.println("\n Total no of Hyundai vehicles are deleted : "+deletedRows);
-		
-		deletedRows = VehicleJDBCHelper.deleteByMakeModel("TVS", "starcity");
-		System.out.println("\n Total no of starcitys are deleted : "+deletedRows);
-		
 
 	}
 
