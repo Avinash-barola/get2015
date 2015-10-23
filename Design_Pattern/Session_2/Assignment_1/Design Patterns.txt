@@ -1,0 +1,25 @@
+
+-:Design Patterns used in Java Framework :-
+
+	Synchronizer Token
+	Composite View (Struts Tiles)
+	Dispatcher View
+	Service to Worker 
+	Iterator
+	Adapter
+	Dependency injection/ or IoC (inversion of control)
+	Factory
+	Singleton 
+	Model View Controller 
+	Front Controller 
+	View Helper
+	Template method
+	Decorator
+	Builder
+	State
+	Factory
+	Abstract Factory
+	Prototype
+	Observer
+	Momento 
+	Strategy etc.
