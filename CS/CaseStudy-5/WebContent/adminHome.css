@@ -1,0 +1,68 @@
+@CHARSET "ISO-8859-1";
+*{
+	padding:0px;
+	margin:0px;
+}
+body{
+	background-image:url("View/Images/car5.jpg");
+	background-size:100%;
+	height:900px;
+	background-repeat: no-repeat;
+	width: 100%;
+	background-color: #bbbcb4;
+}
+header{
+	border-radius:5px;
+	width: 100%;
+	height: 80px;
+	background-color: #cf9fd0;
+	border: 1px thin #400040;
+	text-align: center; 
+}
+header h1{
+	font-size: 40px;
+	font-style: italic;
+	font-weight: lighter;
+}
+header p{
+	font-size: 15px;
+	font-style: italic;
+	font-weight: lighter;
+	padding-left: 9%;
+	
+}
+.bar {
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background-color: #ceceff;
+}
+.bar a{
+	font-size: 20px;
+	font-style: oblique;
+	font-weight: lighter;
+	padding-left: 1%;
+}
+
+.headerImage {
+	border-radius:9px;
+	position:relative;
+	float:left;
+	width: 70px;
+	height: 70px;
+	background-color: black;
+}
+table{
+	margin-left: 650px;	
+	font-weight: bold;
+	font-size: 30px;
+} 
+.img {
+	background-image:url("Images/car1.jpg");
+	background-size:100%;
+	height:700px;
+	background-repeat: no-repeat;
+}
+.anime img.top:hover {
+  	opacity:0;
+}
