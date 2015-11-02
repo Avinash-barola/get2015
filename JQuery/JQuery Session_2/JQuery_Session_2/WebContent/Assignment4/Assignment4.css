@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+body {
+	width: 100%;
+}
+div {
+	background-color: #d6d6ad;
+	width: 30%;
+	height: 300px;
+}

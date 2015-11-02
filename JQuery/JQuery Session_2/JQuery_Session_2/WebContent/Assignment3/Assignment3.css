@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+body {
+	width: 100%;
+}
+.animation {
+	width:10%;
+	height:100px;
+	background-color: blue;
+	border:1px solid black;
+}
+div {
+	width:10%;height:100px;background-color: blue;border:1px solid black;position: absolute;margin-left: 600px;margin-top: 250px;
+}
