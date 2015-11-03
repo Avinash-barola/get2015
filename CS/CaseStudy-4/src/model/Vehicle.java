@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class Vehicle {
+public abstract class Vehicle {
 
 	
 	private String make;
