@@ -1,5 +1,5 @@
 
-public class Car extends Vehicle {
+public abstract class Car extends Vehicle {
 
 	private boolean AC;						// car contains Air conditioner or not
 	private boolean powerSteering;			// car contains power steering or not 
