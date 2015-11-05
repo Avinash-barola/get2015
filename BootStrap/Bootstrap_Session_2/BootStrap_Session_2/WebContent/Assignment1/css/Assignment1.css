@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+.containerBorder {
+	border: 3px solid blue;
+}
+
+.backgroundColor {
+	background-color: #c0c0c0;
+}
+.glyphicon.glyphicon-film {
+    font-size: 100px;
+}

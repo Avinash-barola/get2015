@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src = "jquery-1.11.3.js"></script>
+<script type="text/javascript" src = "bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/Assignment3_1.css" type="text/css">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid well" style="border: 3px solid blue;">
+		<form class = "form-horizontal" role="form">
+			<div class="row">
+				<span class="glyphicon glyphicon-film hidden-lg hidden-md hidden-sm"></span>
+				<div class="col-lg-12 col-md-12 col-sm-12 hidden-xs"> 
+					<h1><div class="text-center">Sample Search</div></h1>
+				</div>
+			</div>
+				<div class="form-group">	
+					<div class="row" style="margin-top: 10px;">
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
+						 	<label class="control-label hidden-xs">Movie Title</label>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter Movie Title">
+						</div>
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
+						 	<label class="control-label hidden-xs">Genre</label>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+							<select style="width:100%">
+								<option disabled="disabled">Select Genre</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
+						 	<label class="control-label hidden-xs">Director</label>
+						</div>
+						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter Director Name">
+						</div>
+						
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
+						 	<label class="control-label hidden-xs">Writer</label>
+						</div>
+						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter Writer Name">
+						</div>
+						
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
+						 	<label class="control-label hidden-xs">Producer</label>
+						</div>
+						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter Producer Name">
+						</div>
+						
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
+						 	<label class="control-label hidden-xs">Composer</label>
+						</div>
+						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter Composer Name">
+						</div>	
+					</div>
+				</div>
+					
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
+						 	<label class="control-label hidden-xs">WebSite</label>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter Website">
+						</div>
+						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
+						 	<label class="control-label hidden-xs">YouTube Trailer</label>
+						</div>
+						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
+							<input class="form-control" type="text" placeholder="Enter YouTube Trailer">
+						</div>
+					</div>
+				</div>	
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 t">
+						 	<label class="control-label hidden-xs">Review</label>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						 	<textarea style="width: 100%;" rows="10" placeholder="Enter Reviwe Here"></textarea>
+						</div>
+					</div>			
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+						 	<label class="control-label hidden-xs">Rating</label>
+						</div>
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+						 	<input class="control-radio" type="radio">
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+						 	<div class="text-danger">Terrible</div>
+						 </div>
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+						 	<input class="control-radio" type="radio">
+						 </div>
+						<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 ">
+						 	<div class="text-info">Watchable</div>
+						</div>
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12" >
+						 	<input class="control-radio" type="radio">
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+						 	<div class="text-success">Best Ever</div>
+						</div>
+					</div>	
+				</div>		
+				<div class="form-group">
+					<div class="row">
+						<div class="hidden-lg hidden-md col-sm-12 hidden-xs">
+							<button type="button" class="btn btn-default">Cancel</button>
+							<button type="button" class="btn btn-primary">Validate</button>
+							<button type="button" class="btn btn-success">Submit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</div>
+						<div class="hidden-lg hidden-md hidden-sm col-xs-12">
+							<button type="button" class="btn btn-default">Cancel</button>
+							<button type="button" class="btn btn-primary">Validate</button>
+							<button type="button" class="btn btn-success">Submit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</div>
+						<div class="col-lg-4 col-md-4">
+						</div>
+						<div class="col-lg-8 col-md-8 hidden-sm hidden-xs">
+							<button type="button" class="btn btn-default">Cancel</button>
+							<button type="button" class="btn btn-primary">Validate</button>
+							<button type="button" class="btn btn-success">Submit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</div>
+					</div>			
+				</div>
+				<div class="row"></div>
+		</form>
+	</div>
+</body>
+</html>
