@@ -5,8 +5,13 @@
 <script type="text/javascript" src = "jquery-1.11.3.js"></script>
 <script type="text/javascript" src = "bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/Assignment3_1.css" type="text/css">
+<link rel="stylesheet" href="css/Assignment2-1.css" type="text/css">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>
 </head>
 <body>
 	<div class="container-fluid well" style="border: 3px solid blue;">
@@ -20,13 +25,13 @@
 				<div class="form-group">	
 					<div class="row" style="margin-top: 10px;">
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
-						 	<label class="control-label hidden-xs">Movie Title</label>
+						 	<label class="control-label">Movie Title</label>
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter Movie Title">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement="right" data-trigger = "hover" title="This is movie title" > 
 						</div>
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
-						 	<label class="control-label hidden-xs">Genre</label>
+						 	<label class="control-label">Genre</label>
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
 							<select style="width:100%">
@@ -39,31 +44,31 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
-						 	<label class="control-label hidden-xs">Director</label>
+						 	<label class="control-label">Director</label>
 						</div>
 						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter Director Name">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement = "right" title="This is movie title">
 						</div>
 						
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
-						 	<label class="control-label hidden-xs">Writer</label>
+						 	<label class="control-label">Writer</label>
 						</div>
 						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter Writer Name">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement = "right" title="This is movie title">
 						</div>
 						
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
-						 	<label class="control-label hidden-xs">Producer</label>
+						 	<label class="control-label">Producer</label>
 						</div>
 						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter Producer Name">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement = "right" title="This is movie title">
 						</div>
 						
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12 ">
-						 	<label class="control-label hidden-xs">Composer</label>
+						 	<label class="control-label">Composer</label>
 						</div>
 						<div class="col-lg-2 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter Composer Name">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement = "right" title="This is movie title">
 						</div>	
 					</div>
 				</div>
@@ -71,16 +76,16 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
-						 	<label class="control-label hidden-xs">WebSite</label>
+						 	<label class="control-label">WebSite</label>
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter Website">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement = "right" title="This is movie title">
 						</div>
 						<div class="col-lg-1 col-md-1 col-sm-4 col-xs-12">
-						 	<label class="control-label hidden-xs">YouTube Trailer</label>
+						 	<label class="control-label">YouTube Trailer</label>
 						</div>
 						<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
-							<input class="form-control" type="text" placeholder="Enter YouTube Trailer">
+							<input class="form-control" type="text" data-toggle = "tooltip" data-placement = "right" title="This is movie title">
 						</div>
 					</div>
 				</div>	
@@ -88,10 +93,10 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 t">
-						 	<label class="control-label hidden-xs">Review</label>
+						 	<label class="control-label">Review</label>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						 	<textarea style="width: 100%;" rows="10" placeholder="Enter Reviwe Here"></textarea>
+						 	<textarea style="width: 100%;" rows="10"></textarea>
 						</div>
 					</div>			
 				</div>
@@ -99,7 +104,7 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-						 	<label class="control-label hidden-xs">Rating</label>
+						 	<label class="control-label">Rating</label>
 						</div>
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
 						 	<input class="control-radio" type="radio">
@@ -143,6 +148,7 @@
 							<button type="button" class="btn btn-success">Submit</button>
 							<button type="button" class="btn btn-danger">Delete</button>
 						</div>
+						
 					</div>			
 				</div>
 				<div class="row"></div>

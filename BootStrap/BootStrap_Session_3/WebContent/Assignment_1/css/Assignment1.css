@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+.carousel-control {
+	margin-top: 54%;
+	height: 6%;
+	background-color: black;
+}
+.carousel-control.left {
+	margin-left: 34%;
+}
+.carousel-control.right {
+	margin-right: 34%;
+}
+.carousel-indicators {
+	margin-bottom: 45%;
+}
+.item.active {
+	border: 5px solid blue;
+}
+.carousel.slide {
+	margin-top:3%;
+	margin-left: 17.5%;
+	width: 60%;
+}
