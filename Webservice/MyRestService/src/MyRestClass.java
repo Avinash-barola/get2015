@@ -1,126 +1,186 @@
+package rest;
 
-import java.io.IOException;  
-import java.net.UnknownHostException;  
-import java.util.ArrayList;  
-import java.util.HashMap;  
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-import org.apache.commons.httpclient.HttpClient;  
-import org.apache.commons.httpclient.HttpException;  
-import org.apache.commons.httpclient.NameValuePair;  
-import org.apache.commons.httpclient.methods.GetMethod;  
-import org.json.JSONArray;  
-import org.json.JSONException;  
-import org.json.JSONObject;  
-import org.springframework.stereotype.Controller;  
-import org.springframework.ui.Model;  
-import org.springframework.web.bind.annotation.ModelAttribute;  
-import org.springframework.web.bind.annotation.PathVariable;  
-import org.springframework.web.bind.annotation.RequestMapping;  
-import org.springframework.web.bind.annotation.RequestMethod;  
-import org.springframework.web.context.request.RequestAttributes;  
-import org.springframework.web.context.request.WebRequest;  
-import org.springframework.web.servlet.ModelAndView;
+import org.apache.http.Header;
+import org.apache.http.HttpException;
+import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import com.appirio.jobs.domain.Job;  
-import com.appirio.jobs.domain.SmsMessage;  
-import com.mongodb.BasicDBObject;  
-import com.mongodb.DB;  
-import com.mongodb.DBCollection;  
-import com.mongodb.DBCursor;  
-import com.mongodb.Mongo;  
-import com.mongodb.MongoException;  
-import com.twilio.sdk.TwilioRestClient;  
-import com.twilio.sdk.TwilioRestException;  
-import com.twilio.sdk.TwilioRestResponse;
+public class RESTServicesConsumer {
 
-/**
- * @author Jeff Douglas (jeff@appirio.com)
- */
+	static final String USERNAME = "avinash.barola@metacube.com";
+	static final String PASSWORD = "avinash01LvWOSj8r8hhuYygK2kuYetbYg";
+	static final String LOGINURL = "https://login.salesforce.com";
+	static final String GRANTSERVICE = "/services/oauth2/token?grant_type=password";
+	static final String CLIENTID = "3MVG9ZL0ppGP5UrCJNszgnq4XwZ06OLxPHU3_A_EOVLtF0IOuvGzzq3hldpuBTAYp.kfNfqh2_PFVDMtGISGi";
+	static final String CLIENTSECRET = "3825749946662741519";
+	private static String REST_ENDPOINT = "/services/data";
+	private static String API_VERSION = "/v32.0";
+	private static String baseUri;
+	private static Header oauthHeader;
+	private static Header prettyPrintHeader = new BasicHeader("X-PrettyPrint","1");
+	private static String ContactId;
+	private static String ContactName;
+	private static String tName;
+	private static String leadCompany;
 
-@RequestMapping("/account/*")
-@Controller
-public class MyRestClass {
+	public static void main(String[] args) throws ParseException, IOException, HttpException, JSONException {
 
-  private static final String ACCESS_TOKEN = "ACCESS_TOKEN";
-  private static final String INSTANCE_URL = "INSTANCE_URL";
-  private static Mongo m;
-  private static DB db;
-  private static DBCollection coll;
-  private static DBCursor cur;
-  private ArrayList<Job> jobs = new ArrayList<Job>();
+		 JSONObject authJsonObject=OAuthServlet.oAuthSessionProvider(LOGINURL, USERNAME, PASSWORD,CLIENTID, CLIENTSECRET);
+		String loginAccessToken = null;
+		String loginInstanceUrl = null;
 
+		try {
+			//authJsonObject = (JSONObject) new JSONTokener(getResult).nextValue();
+			loginAccessToken = authJsonObject.getString("access_token");
+			loginInstanceUrl = authJsonObject.getString("instance_url");
+		} catch (JSONException jsonException) {
+			jsonException.printStackTrace();
+		}
 
-    @RequestMapping(value="/job/list", method=RequestMethod.GET)
-    public ModelAndView list(WebRequest req) {
+		baseUri = "https://ap2.salesforce.com" + REST_ENDPOINT + API_VERSION;
+		oauthHeader = new BasicHeader("Authorization", "OAuth "
+				+ loginAccessToken);
+		System.out.println("oauthHeader1: " + oauthHeader);
+		System.out.println("Successful login");
+		System.out.println("access token/session ID: " + loginAccessToken);
+		System.out.println("baseUri: " + baseUri);
+		// Run codes to query, insert, update and delete records in Salesforce
+		// using REST API
+		queryContacts();
+		createStudents();
+		// release connection
+		//httpPost.releaseConnection();
+	}
 
-      // if the job collection is empty then fetch jobs from Force.com
-      if (jobs.isEmpty()) {
+	// Query Leads using REST HttpGet
+	public static void queryContacts() {
+		System.out.println("\n_______________ Contacts QUERY _______________");
+		try {
 
-        // fetch the access token and url from the servlet session
-        String accessToken = (String) req.getAttribute(ACCESS_TOKEN, RequestAttributes.SCOPE_SESSION);
-        String instanceUrl = (String) req.getAttribute(INSTANCE_URL, RequestAttributes.SCOPE_SESSION);
+			// Set up the HTTP objects needed to make the request.
+			HttpClient httpClient = HttpClientBuilder.create().build();
 
-        System.out.println("Access token: "+accessToken);
-        System.out.println("Instance Url: "+instanceUrl);
+			String uri = baseUri
+					+ "/query?q=SELECT+Id+,+Name,+Experience__c,+Languages__c,+Level__c,+Subjects__c+FROM+Contact";
+			System.out.println("Query URL: " + uri);
+			HttpGet httpGet = new HttpGet(uri);
+			System.out.println("oauthHeader2: " + oauthHeader);
+			httpGet.addHeader(oauthHeader);
+			httpGet.addHeader(prettyPrintHeader);
 
-        jobs = new ArrayList<Job>();
-      HttpClient httpclient = new HttpClient();
-          GetMethod gm = new GetMethod(instanceUrl + "/services/data/v20.0/query");
-          //set the token in the header
-          gm.setRequestHeader("Authorization", "OAuth "+accessToken);
-          //set the SOQL as a query param
-          NameValuePair[] params = new NameValuePair[1];
-          //no need to url encode here...it will cause your query to fail
-          params[0] = new NameValuePair("q","Select Id, Name, Job_Title__c, Location__c, " +
-              "Duties__c, Skills__c, Salary__c, Box_Url__c from Job__c Order by Job_Title__c");
-          gm.setQueryString(params);
+			// Make the request.
+			HttpResponse response = httpClient.execute(httpGet);
 
-          String respBody = "";
+			// Process the result
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				String response_string = EntityUtils.toString(response
+						.getEntity());
+				try {
+					JSONObject json = new JSONObject(response_string);
+					System.out.println("JSON result of Query:\n"
+							+ json.toString(1));
+				} catch (JSONException je) {
+					je.printStackTrace();
+				}
+			} else {
+				System.out
+						.println("Query was unsuccessful. Status code returned is "
+								+ statusCode);
+				System.out.println("An error has occured. Http status: "
+						+ response.getStatusLine().getStatusCode());
+				System.out.println(getBody(response.getEntity().getContent()));
+				System.exit(-1);
+			}
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+		}
+	}
 
-          try {
-        httpclient.executeMethod(gm);
-        respBody = gm.getResponseBodyAsString();
-            System.out.println("response body: " + respBody);
-      } catch (HttpException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-      } catch (IOException e2) {
-        // TODO Auto-generated catch block
-        e2.printStackTrace();
-      } finally {
-              gm.releaseConnection();
-          }
+	public static void createStudents() {
+		System.out.println("\n_______________ Student INSERT _______________");
 
-          try {
-              JSONObject json = new JSONObject(respBody);                
-              JSONArray results = json.getJSONArray("records");
+		String uri = baseUri + "/sobjects/Student__c/";
+		try {
 
-             for(int i = 0; i < results.length(); i++) {
-               // add the json payload to a Job object
-               Job job = new Job(results.getJSONObject(i).getString("Id"), 
-            results.getJSONObject(i).getString("Name"),
-            results.getJSONObject(i).getString("Job_Title__c"),
-            results.getJSONObject(i).getString("Location__c"),
-            results.getJSONObject(i).getString("Duties__c"),
-            results.getJSONObject(i).getString("Skills__c"),
-            results.getJSONObject(i).getString("Salary__c"),
-            results.getJSONObject(i).getString("Box_Url__c"));
+			// create the JSON object containing the new lead details.
+			JSONObject student = new JSONObject();
+			student.put("Name","DeadPool");
+			student.put("First_Name__c", "Rest");
+			student.put("Class__c", "a0D28000002FNXv");
 
-               // add the job to the collection
-               jobs.add(job);
-             }
+			System.out.println("JSON for Student record to be inserted:\n"
+					+ student.toString(1));
 
+			// Construct the objects needed for the request
+			HttpClient httpClient = HttpClientBuilder.create().build();
 
-          } catch (JSONException e) {
-              e.printStackTrace();
-          }
+			HttpPost httpPost = new HttpPost(uri);
+			httpPost.addHeader(oauthHeader);
+			httpPost.addHeader(prettyPrintHeader);
+			// The message we are going to post
+			StringEntity body = new StringEntity(student.toString(1));
+			body.setContentType("application/json");
+			httpPost.setEntity(body);
 
-          System.out.println("jobs found: "+jobs.size());
+			// Make the request
+			HttpResponse response = httpClient.execute(httpPost);
 
-      }
+			// Process the results
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 201) {
+				String response_string = EntityUtils.toString(response
+						.getEntity());
+				JSONObject json = new JSONObject(response_string);
+				// Store the retrieved lead id to use when we update the lead.
+				//leadId = json.getString("id");
+				//System.out.println("New Lead id from response: " + leadId);
+			} else {
+				System.out.println("Insertion unsuccessful. Status code returned is "
+								+ statusCode);
+				System.out.println(EntityUtils.toString(response
+						.getEntity()));
+			}
+		} catch (JSONException e) {
+			System.out.println("Issue creating JSON or processing results");
+			e.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+		}
+	}
 
-      ModelAndView mav = new ModelAndView("job/list");
-      mav.addObject("jobs", jobs);
-      return mav;
-    }
+	private static String getBody(InputStream inputStream) {
+		String result = "";
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					inputStream));
+			String inputLine;
+			while ((inputLine = in.readLine()) != null) {
+				result += inputLine;
+				result += "\n";
+			}
+			in.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		return result;
+	}
+}
